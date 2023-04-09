@@ -1,0 +1,65 @@
+# depslib dependency file v1.0
+901951330 source:d:\coding\project\tiny\analyze.c
+	"globals.h"
+	"symtab.h"
+	"analyze.h"
+
+901951302 d:\coding\project\tiny\globals.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
+901951304 d:\coding\project\tiny\symtab.h
+
+901951298 d:\coding\project\tiny\analyze.h
+
+901951340 source:d:\coding\project\tiny\code.c
+	"globals.h"
+	"code.h"
+
+901951300 d:\coding\project\tiny\code.h
+
+901951340 source:d:\coding\project\tiny\main.c
+	"globals.h"
+	"util.h"
+	"scan.h"
+	"parse.h"
+	"analyze.h"
+	"cgen.h"
+
+901951306 d:\coding\project\tiny\util.h
+
+901951304 d:\coding\project\tiny\scan.h
+
+901951304 d:\coding\project\tiny\parse.h
+
+901951300 d:\coding\project\tiny\cgen.h
+
+901951342 source:d:\coding\project\tiny\parse.c
+	"globals.h"
+	"util.h"
+	"scan.h"
+	"parse.h"
+
+933753958 source:d:\coding\project\tiny\scan.c
+	"globals.h"
+	"util.h"
+	"scan.h"
+
+901951346 source:d:\coding\project\tiny\symtab.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"symtab.h"
+
+1679910179 source:d:\coding\project\tiny\cgen.c
+	"globals.h"
+	"symtab.h"
+	"code.h"
+	"cgen.h"
+
+1679910167 source:d:\coding\project\tiny\util.c
+	"globals.h"
+	"util.h"
+
