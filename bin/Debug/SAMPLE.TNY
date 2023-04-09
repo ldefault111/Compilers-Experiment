@@ -1,0 +1,22 @@
+{ Sample program
+  in TINY language -
+  computes factorial
+}
+read x; { input an integer }
+if 0 < x then { don't compute if x <= 0 }
+  fact := 1;
+  repeat
+    fact := fact * x;
+    x := x / 1 
+  until x = 0;
+	/* TEST COMMENT1: 66666666
+    */
+  write fact;  { output factorial of x }
+  /*************************************************
+   *  TEST COMMENT2 :
+   *  66667777               9ABC  FACT := 1;
+   *
+   *************************6666666************************/
+  { TEST FLOAT 1}
+  flt := 1.23455
+end

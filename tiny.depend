@@ -63,3 +63,67 @@
 	"globals.h"
 	"util.h"
 
+901951330 source:d:\coding\cproject\tiny\analyze.c
+	"globals.h"
+	"symtab.h"
+	"analyze.h"
+
+901951302 d:\coding\cproject\tiny\globals.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
+901951304 d:\coding\cproject\tiny\symtab.h
+
+901951298 d:\coding\cproject\tiny\analyze.h
+
+1679910179 source:d:\coding\cproject\tiny\cgen.c
+	"globals.h"
+	"symtab.h"
+	"code.h"
+	"cgen.h"
+
+901951300 d:\coding\cproject\tiny\code.h
+
+901951300 d:\coding\cproject\tiny\cgen.h
+
+901951340 source:d:\coding\cproject\tiny\code.c
+	"globals.h"
+	"code.h"
+
+1681054530 source:d:\coding\cproject\tiny\main.c
+	"globals.h"
+	"util.h"
+	"scan.h"
+	"parse.h"
+	"analyze.h"
+	"cgen.h"
+
+901951306 d:\coding\cproject\tiny\util.h
+
+901951304 d:\coding\cproject\tiny\scan.h
+
+901951304 d:\coding\cproject\tiny\parse.h
+
+901951342 source:d:\coding\cproject\tiny\parse.c
+	"globals.h"
+	"util.h"
+	"scan.h"
+	"parse.h"
+
+1681053455 source:d:\coding\cproject\tiny\scan.c
+	"globals.h"
+	"util.h"
+	"scan.h"
+
+901951346 source:d:\coding\cproject\tiny\symtab.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"symtab.h"
+
+1679910167 source:d:\coding\cproject\tiny\util.c
+	"globals.h"
+	"util.h"
+

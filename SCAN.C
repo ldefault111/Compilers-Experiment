@@ -8,10 +8,11 @@
 #include "globals.h"
 #include "util.h"
 #include "scan.h"
+#define DEBUG
 
 /* states in scanner DFA */
 typedef enum
-   { START,INASSIGN,INCOMMENT,INNUM,INID,DONE }
+   { START,INASSIGN,INCOMMENT,INNUM,INID,DONE,POSCOM,INLINECOM,POSOCOM,INFLOAT }
    StateType;
 
 /* lexeme of identifier or reserved word */
@@ -73,7 +74,7 @@ static TokenType reservedLookup (char * s)
 /****************************************/
 /* the primary function of the scanner  */
 /****************************************/
-/* function getToken returns the 
+/* function getToken returns the
  * next token in source file
  */
 TokenType getToken(void)
@@ -102,6 +103,11 @@ TokenType getToken(void)
          { save = FALSE;
            state = INCOMMENT;
          }
+         else if (c == '/')
+         {
+           save = FALSE;
+           state = POSCOM;
+         }
          else
          { state = DONE;
            switch (c)
@@ -123,9 +129,6 @@ TokenType getToken(void)
                break;
              case '*':
                currentToken = TIMES;
-               break;
-             case '/':
-               currentToken = OVER;
                break;
              case '(':
                currentToken = LPAREN;
@@ -162,6 +165,19 @@ TokenType getToken(void)
          }
          break;
        case INNUM:
+         if (c == '.')
+         {
+           state = INFLOAT;
+         }
+         else if (!isdigit(c))
+         { /* backup in the input */
+           ungetNextChar();
+           save = FALSE;
+           state = DONE;
+           currentToken = NUM;
+         }
+         break;
+       case INFLOAT:
          if (!isdigit(c))
          { /* backup in the input */
            ungetNextChar();
@@ -177,6 +193,49 @@ TokenType getToken(void)
            save = FALSE;
            state = DONE;
            currentToken = ID;
+         }
+         break;
+       case POSCOM:
+         save = FALSE;
+         if (c == '*')
+         {
+           state = INLINECOM;
+         }
+         else
+         {
+           ungetNextChar();
+           c='/';
+           save = TRUE;
+           state = DONE;
+           currentToken = OVER;
+         }
+         break;
+       case INLINECOM:
+         save = FALSE;
+         if (c == '*')
+         {
+           state = POSOCOM;
+         }
+         else if(c == EOF)
+         {
+           ungetNextChar();
+           currentToken = ERROR;
+         }
+         break;
+       case POSOCOM:
+         save = FALSE;
+         if (c == '/')
+         {
+           state = START;
+         }
+         else if (c == EOF)
+         {
+           ungetNextChar();
+           currentToken = ERROR;
+         }
+         else if (c != '*')
+         {
+           state = INLINECOM;
          }
          break;
        case DONE:
