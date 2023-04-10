@@ -8,7 +8,6 @@
 #include "globals.h"
 #include "util.h"
 #include "scan.h"
-#define DEBUG
 
 /* states in scanner DFA */
 typedef enum
