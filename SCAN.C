@@ -12,7 +12,7 @@
 
 /* states in scanner DFA */
 typedef enum
-   { START,INASSIGN,INCOMMENT,INNUM,INID,DONE,POSCOM,INLINECOM,POSOCOM,INFLOAT }
+   { START,INASSIGN,INCOMMENT,INNUM,INID,DONE,POSCOM,INLINECOM,POSOCOM,INFLOAT,SCIENTIFIC }
    StateType;
 
 /* lexeme of identifier or reserved word */
@@ -166,9 +166,9 @@ TokenType getToken(void)
          break;
        case INNUM:
          if (c == '.')
-         {
            state = INFLOAT;
-         }
+         else if (c == 'E' || c == 'e')
+           state = SCIENTIFIC;
          else if (!isdigit(c))
          { /* backup in the input */
            ungetNextChar();
@@ -178,12 +178,23 @@ TokenType getToken(void)
          }
          break;
        case INFLOAT:
+         if (c == 'E' || c == 'e')
+           state = SCIENTIFIC;
+         else if (!isdigit(c))
+         { /* backup in the input */
+           ungetNextChar();
+           save = FALSE;
+           state = DONE;
+           currentToken = FLOAT;
+         }
+         break;
+       case SCIENTIFIC:
          if (!isdigit(c))
          { /* backup in the input */
            ungetNextChar();
            save = FALSE;
            state = DONE;
-           currentToken = NUM;
+           currentToken = FLOAT;
          }
          break;
        case INID:
@@ -198,9 +209,7 @@ TokenType getToken(void)
        case POSCOM:
          save = FALSE;
          if (c == '*')
-         {
            state = INLINECOM;
-         }
          else
          {
            ungetNextChar();
@@ -213,9 +222,7 @@ TokenType getToken(void)
        case INLINECOM:
          save = FALSE;
          if (c == '*')
-         {
            state = POSOCOM;
-         }
          else if(c == EOF)
          {
            ungetNextChar();
@@ -225,9 +232,7 @@ TokenType getToken(void)
        case POSOCOM:
          save = FALSE;
          if (c == '/')
-         {
            state = START;
-         }
          else if (c == EOF)
          {
            ungetNextChar();

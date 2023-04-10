@@ -1,0 +1,13 @@
+{ comment on test1 }
+x := 10;
+/** test comment 1
+ *  666666666666666666666666666
+ **********************6**********************/
+read y;
+if 0 < x then
+	repeat
+		y := 1.25 * x / 2
+	until x = 0;
+write y
+end
+{ no end comment
