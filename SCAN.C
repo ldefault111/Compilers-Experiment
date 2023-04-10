@@ -11,8 +11,8 @@
 
 /* states in scanner DFA */
 typedef enum
-   { START,INASSIGN,INCOMMENT,INNUM,INID,DONE,
-   POSCOM,INLINECOM,POSOCOM,INFLOAT,SCIENTIFIC,NUMEXIST,FLOATEXIST}
+   { START,INASSIGN,INCOMMENT,INNUM,INID,DONE,POSCOM,INLINECOM,
+   POSOCOM,INFLOAT,SCIENTIFIC,NUMEXIST,FLOATEXIST,SCISYM}
    StateType;
 
 /* lexeme of identifier or reserved word */
@@ -196,10 +196,23 @@ TokenType getToken(void)
            ungetNextChar();
            save = FALSE;
            state = DONE;
-           currentToken = NUM;
+           currentToken = FLOAT;
          }
          break;
        case SCIENTIFIC:
+         if (isdigit(c))
+           state = NUMEXIST;
+         else if (c == '+' || c == '-')
+           state = SCISYM;
+         else
+         { /* backup in the input */
+           ungetNextChar();
+           save = FALSE;
+           state = DONE;
+           currentToken = ERROR;
+         }
+         break;
+       case SCISYM:
          if (isdigit(c))
            state = NUMEXIST;
          else
