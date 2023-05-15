@@ -63,3 +63,67 @@
 	"globals.h"
 	"util.h"
 
+1684132047 source:d:\coding\cproject\compilers-experiment\analyze.c
+	"globals.h"
+	"symtab.h"
+	"analyze.h"
+
+1684132047 d:\coding\cproject\compilers-experiment\globals.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
+1684132047 d:\coding\cproject\compilers-experiment\symtab.h
+
+1684132047 d:\coding\cproject\compilers-experiment\analyze.h
+
+1684132047 source:d:\coding\cproject\compilers-experiment\cgen.c
+	"globals.h"
+	"symtab.h"
+	"code.h"
+	"cgen.h"
+
+1684132047 d:\coding\cproject\compilers-experiment\code.h
+
+1684132047 d:\coding\cproject\compilers-experiment\cgen.h
+
+1684132047 source:d:\coding\cproject\compilers-experiment\code.c
+	"globals.h"
+	"code.h"
+
+1684132047 source:d:\coding\cproject\compilers-experiment\main.c
+	"globals.h"
+	"util.h"
+	"scan.h"
+	"parse.h"
+	"analyze.h"
+	"cgen.h"
+
+1684132047 d:\coding\cproject\compilers-experiment\util.h
+
+1684132047 d:\coding\cproject\compilers-experiment\scan.h
+
+1684132047 d:\coding\cproject\compilers-experiment\parse.h
+
+1684132047 source:d:\coding\cproject\compilers-experiment\parse.c
+	"globals.h"
+	"util.h"
+	"scan.h"
+	"parse.h"
+
+1684132047 source:d:\coding\cproject\compilers-experiment\scan.c
+	"globals.h"
+	"util.h"
+	"scan.h"
+
+1684132047 source:d:\coding\cproject\compilers-experiment\symtab.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"symtab.h"
+
+1684132047 source:d:\coding\cproject\compilers-experiment\util.c
+	"globals.h"
+	"util.h"
+
