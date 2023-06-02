@@ -23,6 +23,9 @@ void printToken( TokenType token, const char* tokenString )
     case UNTIL:
     case READ:
     case WRITE:
+    case INT:
+    case VOID:
+    case FUNCTION:
       fprintf(listing,
          "reserved word: %s\n",tokenString);
       break;
@@ -37,6 +40,9 @@ void printToken( TokenType token, const char* tokenString )
     case TIMES: fprintf(listing,"*\n"); break;
     case OVER: fprintf(listing,"/\n"); break;
     case ENDFILE: fprintf(listing,"EOF\n"); break;
+    case COMMA: fprintf(listing,",\n"); break;
+    case LBRACK: fprintf(listing,"[\n"); break;
+    case RBRACK: fprintf(listing,"]\n"); break;
     case NUM:
       fprintf(listing,
           "NUM, val= %s\n",tokenString);
@@ -53,6 +59,7 @@ void printToken( TokenType token, const char* tokenString )
       fprintf(listing,"Unknown token: %d\n",token);
   }
 }
+
 
 /* Function newStmtNode creates a new statement
  * node for syntax tree construction
@@ -85,6 +92,25 @@ TreeNode * newExpNode(ExpKind kind)
     t->sibling = NULL;
     t->nodekind = ExpK;
     t->kind.exp = kind;
+    t->lineno = lineno;
+    t->type = Void;
+  }
+  return t;
+}
+
+/* Function newFuncNode creates a new function
+ * node for syntax tree construction
+ */
+TreeNode * newFuncNode(FuncKind kind)
+{ TreeNode * t = (TreeNode *) malloc(sizeof(TreeNode));
+  int i;
+  if (t==NULL)
+    fprintf(listing,"Out of memory error at line %d\n",lineno);
+  else {
+    for (i=0;i<MAXCHILDREN;i++) t->child[i] = NULL;
+    t->sibling = NULL;
+    t->nodekind = FuncK;
+    t->kind.func = kind;
     t->lineno = lineno;
     t->type = Void;
   }
@@ -147,6 +173,9 @@ void printTree( TreeNode * tree )
         case WriteK:
           fprintf(listing,"Write\n");
           break;
+        case DeclareK:
+          fprintf(listing,"Declare: %s\n",tree->attr.name);
+          break;
         default:
           fprintf(listing,"Unknown ExpNode kind\n");
           break;
@@ -164,8 +193,30 @@ void printTree( TreeNode * tree )
         case IdK:
           fprintf(listing,"Id: %s\n",tree->attr.name);
           break;
+        case ArrayK:
+          fprintf(listing,"ArrayId: %s\n",tree->attr.name);
+          break;
         default:
           fprintf(listing,"Unknown ExpNode kind\n");
+          break;
+      }
+    }
+    else if (tree->nodekind==FuncK)
+    { switch (tree->kind.func) {
+        case FuncIdK:
+          fprintf(listing,"Function: %s\n",tree->attr.name);
+          break;
+        case ParamK:
+          fprintf(listing,"Param: %s\n",tree->attr.name);
+          break;
+        case TypeK:
+          fprintf(listing,"Type: %s\n",tree->attr.name);
+          break;
+        case DimensionK:
+          fprintf(listing,"Dimension: %d\n",tree->attr.val);
+          break;
+        default:
+          fprintf(listing,"Unknown FuncNode kind\n");
           break;
       }
     }

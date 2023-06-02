@@ -2,13 +2,21 @@
   in TINY language -
   computes factorial
 }
-read x; { input an integer }
-if 0 < x then { don't compute if x <= 0 }
-  fact := 1;
-  repeat
-    fact := fact * x;
-    x := x - 1
-  until x = 0;
-
-  write fact  { output factorial of x }
+function int test(int x, void a[][])
+  int x,y,z:=10,arr[100][20]:=(0,0,10000);
+  if 0 < x then
+	  fact := 1;
+	  repeat
+		fact := fact * x;
+		x := x - 1
+	  until x = 0;
+	  write fact
+  end
 end
+function void testtest(void)
+  x := 1
+end
+  x := 100 * fact + ar[100][5][4];
+  int x,y:=19,ar[10]:=(7,7);
+  double x=1;
+  x := 0*ar[10]/z[]

@@ -68,7 +68,7 @@
 	"symtab.h"
 	"analyze.h"
 
-1684132047 d:\coding\cproject\compilers-experiment\globals.h
+1685711698 d:\coding\cproject\compilers-experiment\globals.h
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -92,7 +92,7 @@
 	"globals.h"
 	"code.h"
 
-1684132047 source:d:\coding\cproject\compilers-experiment\main.c
+1685696601 source:d:\coding\cproject\compilers-experiment\main.c
 	"globals.h"
 	"util.h"
 	"scan.h"
@@ -100,19 +100,19 @@
 	"analyze.h"
 	"cgen.h"
 
-1684132047 d:\coding\cproject\compilers-experiment\util.h
+1685694251 d:\coding\cproject\compilers-experiment\util.h
 
 1684132047 d:\coding\cproject\compilers-experiment\scan.h
 
 1684132047 d:\coding\cproject\compilers-experiment\parse.h
 
-1684132047 source:d:\coding\cproject\compilers-experiment\parse.c
+1685698725 source:d:\coding\cproject\compilers-experiment\parse.c
 	"globals.h"
 	"util.h"
 	"scan.h"
 	"parse.h"
 
-1684132047 source:d:\coding\cproject\compilers-experiment\scan.c
+1685690370 source:d:\coding\cproject\compilers-experiment\scan.c
 	"globals.h"
 	"util.h"
 	"scan.h"
@@ -123,7 +123,7 @@
 	<string.h>
 	"symtab.h"
 
-1684132047 source:d:\coding\cproject\compilers-experiment\util.c
+1685711793 source:d:\coding\cproject\compilers-experiment\util.c
 	"globals.h"
 	"util.h"
 
