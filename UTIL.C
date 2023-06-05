@@ -196,6 +196,9 @@ void printTree( TreeNode * tree )
         case ArrayK:
           fprintf(listing,"ArrayId: %s\n",tree->attr.name);
           break;
+        case CallFuncK:
+          fprintf(listing,"CallFunction: %s\n",tree->attr.name);
+          break;
         default:
           fprintf(listing,"Unknown ExpNode kind\n");
           break;

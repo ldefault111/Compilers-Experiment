@@ -68,7 +68,7 @@
 	"symtab.h"
 	"analyze.h"
 
-1685711698 d:\coding\cproject\compilers-experiment\globals.h
+1685715151 d:\coding\cproject\compilers-experiment\globals.h
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -123,7 +123,7 @@
 	<string.h>
 	"symtab.h"
 
-1685711793 source:d:\coding\cproject\compilers-experiment\util.c
+1685715176 source:d:\coding\cproject\compilers-experiment\util.c
 	"globals.h"
 	"util.h"
 

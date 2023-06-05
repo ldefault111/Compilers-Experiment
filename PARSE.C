@@ -25,6 +25,9 @@ static TreeNode * exp(void);
 static TreeNode * simple_exp(void);
 static TreeNode * term(void);
 static TreeNode * factor(void);
+static TreeNode * getf(char*);
+static TreeNode * call_params(void);
+static TreeNode * element(void);
 static TreeNode * declare(void);
 static TreeNode * value(void);
 static TreeNode * bnum(void);
@@ -181,7 +184,9 @@ TreeNode * term(void)
 }
 
 TreeNode * factor(void)
-{ TreeNode * t = NULL;
+{ // factor -> (exp) | NUM | IDgetf
+  TreeNode * t = NULL;
+  char *tmp = NULL;
   switch (token) {
     case NUM :
       t = newExpNode(ConstK);
@@ -189,8 +194,10 @@ TreeNode * factor(void)
         t->attr.val = atoi(tokenString);
       match(NUM);
       break;
-    case ID : // declare -> ID { [NUM] }
-      t = declare();
+    case ID : // IDgetf
+      tmp = copyString(tokenString);
+      match(ID);
+      t = getf(tmp);
       break;
     case LPAREN :
       match(LPAREN);
@@ -203,6 +210,94 @@ TreeNode * factor(void)
       token = getToken();
       break;
     }
+  return t;
+}
+
+TreeNode * getf(char* tmp)
+{ // getf -> [ { [NUM] } | (call_params) ]
+  // following(getf) = following(factor) V following(term)
+  //                 = {* / + -} V following(simple-exp)
+  //                 = {* / + - = <} V following(exp)
+  //                 = {* / + - = < ; EOF THEN ELSE END UNTIL}
+  TreeNode * t = NULL;
+  if(token == LBRACK)
+  {
+    t = newExpNode(ArrayK);
+    t->attr.name = copyString(tmp);
+    TreeNode * p = NULL;
+    while(token == LBRACK)
+    {
+      match(LBRACK);
+      TreeNode * q = newExpNode(ConstK);
+      if ((q!=NULL) && (token==NUM))
+        q->attr.val = atoi(tokenString);
+      if(p != NULL)
+        p->sibling = q;
+      else
+        t->child[0] = q;
+      p = q;
+      match(NUM);
+      match(RBRACK);
+    }
+  }
+  else if(token == LPAREN)
+  {
+    t = newExpNode(CallFuncK);
+    t->attr.name = copyString(tmp);
+    match(LPAREN);
+    t->child[0] = call_params();
+    match(RPAREN);
+  }
+  else if(token == OVER || token == TIMES || token == PLUS || token == EOF ||
+          token == MINUS || token == EQ || token == LT || token == SEMI || token == THEN ||
+          token == ELSE || token == END || token == UNTIL) // following
+  {
+    t = newExpNode(IdK);
+    t->attr.name = copyString(tmp);
+    printf("IDK:%s\n",t->attr.name);
+  }
+  else {
+    syntaxError("unexpected token -> ");
+    printToken(token,tokenString);
+    token = getToken();
+  }
+  return t;
+}
+
+TreeNode * call_params(void)
+{ // call_params -> element { ,element }
+  TreeNode * t = element();
+  TreeNode * p = t, *s = t;
+  while(token == COMMA && p != NULL)
+  {
+    match(COMMA);
+    t = element();
+    p->sibling = t;
+    p = t;
+  }
+  return s;
+}
+
+TreeNode * element(void)
+{ // element -> NUM | ID
+  TreeNode * t = NULL;
+  if(token == NUM)
+  {
+    t = newExpNode(ConstK);
+    t->attr.val = atoi(tokenString);
+    match(NUM);
+  }
+  else if(token == ID)
+  {
+    t = newExpNode(IdK);
+    t->attr.name = copyString(tokenString);
+    match(ID);
+  }
+  else {
+    syntaxError("unexpected token -> ");
+    printToken(token,tokenString);
+    token = getToken();
+  }
   return t;
 }
 
